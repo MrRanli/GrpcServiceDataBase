@@ -141,14 +141,14 @@ namespace GrpcServiceDataBase.Services
 
             var response = new GetClientBankAccountsUserDoResponse();
             var ClientBankAccounts = await _dbContext.ClientBankAccounts
-             .Where(t => t.ClientInfo.Id == request.ClientId)
+             .Where(t => t.ClientInfoId == request.ClientId)
             .ToListAsync();
 
             foreach (var item in ClientBankAccounts)
             {
                 response.ClientBanckAccount.Add(new GetClientBankAccountUserDoResponse
                 {
-                    ClientId = item.ClientInfo.Id,
+                    ClientId = item.ClientInfoId,
                     Accounts = item.Account,
                     Numbers = item.Number
                 });
