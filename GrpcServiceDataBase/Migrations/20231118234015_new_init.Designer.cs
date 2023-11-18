@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GrpcServiceDataBase.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20231118233701_new_init")]
+    [Migration("20231118234015_new_init")]
     partial class new_init
     {
         /// <inheritdoc />

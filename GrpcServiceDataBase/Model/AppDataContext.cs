@@ -19,7 +19,6 @@ namespace GrpcServiceDataBase.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ClientBankAccount>(entity =>{
                 //1-Many
@@ -43,7 +42,7 @@ namespace GrpcServiceDataBase.Model
             modelBuilder.Entity<ClientBankAccount>().HasData(new ClientBankAccount[]
             {
                new ClientBankAccount() {Id = 1, Account = "Срочный",Number = "42305840513000000112", ClientInfoId = 1 },
-               new ClientBankAccount() {Id = 2, Account = "До востреббования",Number = "42301810413002008000", ClientInfoId = 1 },
+               new ClientBankAccount() {Id = 2, Account = "До востребования",Number = "42301810413002008000", ClientInfoId = 1 },
                new ClientBankAccount() {Id = 3, Account = "Карточный",Number = "40817810310009035474", ClientInfoId = 1}
             });
 
