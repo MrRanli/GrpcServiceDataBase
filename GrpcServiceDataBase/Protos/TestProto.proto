@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceDataBase";
+
+package greet;
+
+service UserDo
+{
+	//PasteValuesOnTable
+	rpc PasteValuesOnTableUserDo(PasteValuesOnTableRequest) returns(PasteValuesOnTableResponse){}
+
+	//Check password 
+	rpc CheckUserDo(CheckUserDoRequest) returns(CheckUserDoResponse){}
+	
+	//GetClientInfoUserDo
+	rpc GetClientInfoUserDo(GetClientInfoUserDoRequest) returns(GetClientInfoUserDoResponse){}
+
+}
+
+
+
+message PasteValuesOnTableRequest{
+}
+message PasteValuesOnTableResponse{
+	 string Text = 1;
+}
+
+
+
+message CheckUserDoRequest{
+	string Phone = 1;
+    string Password = 2;
+}
+
+message CheckUserDoResponse{
+	int32 UserId = 1;
+}
+
+
+
+message GetClientInfoUserDoRequest{
+	int32 UserId = 1;
+}
+
+message GetClientInfoUserDoResponse{
+    int32 id = 1;
+	string Name = 2; 
+    string FirstName = 3;
+    string LastName = 4;
+	string Phone = 5;	 
+}
