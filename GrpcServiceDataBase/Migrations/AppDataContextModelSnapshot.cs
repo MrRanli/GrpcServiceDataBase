@@ -33,13 +33,16 @@ namespace GrpcServiceDataBase.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserAuthentiClientBankAccountscationInfo");
+                    b.ToTable("ClientBankAccounts");
                 });
 
             modelBuilder.Entity("GrpcServiceDataBase.Model.DAL.Entities.ClientInfo", b =>

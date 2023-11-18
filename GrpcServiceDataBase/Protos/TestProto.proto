@@ -15,6 +15,8 @@ service UserDo
 	//GetClientInfoUserDo
 	rpc GetClientInfoUserDo(GetClientInfoUserDoRequest) returns(GetClientInfoUserDoResponse){}
 
+	//GetClientBankAccountsUserDo
+    rpc GetClientBankAccountsUserDo(GetClientBankAccountsUserDoRequest) returns(GetClientBankAccountsUserDoResponse){}
 }
 
 
@@ -33,13 +35,13 @@ message CheckUserDoRequest{
 }
 
 message CheckUserDoResponse{
-	int32 UserId = 1;
+	int32 ClientId = 1;
 }
 
 
 
 message GetClientInfoUserDoRequest{
-	int32 UserId = 1;
+	int32 ClientId = 1;
 }
 
 message GetClientInfoUserDoResponse{
@@ -48,4 +50,19 @@ message GetClientInfoUserDoResponse{
     string FirstName = 3;
     string LastName = 4;
 	string Phone = 5;	 
+}
+
+
+
+message GetClientBankAccountsUserDoRequest{
+	int32 ClientId = 1;
+}
+
+message GetClientBankAccountsUserDoResponse{
+    repeated GetClientBankAccountUserDoResponse ClientBanckAccount = 1;
+}
+message GetClientBankAccountUserDoResponse{
+    int32 id = 1;
+	string Accounts = 2; 
+    string Numbers = 3;
 }

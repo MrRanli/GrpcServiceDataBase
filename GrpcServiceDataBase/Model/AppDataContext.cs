@@ -8,7 +8,7 @@ namespace GrpcServiceDataBase.Model
     public class AppDataContext : DbContext
     {
         public virtual DbSet<ClientInfo> ClientInfo => Set<ClientInfo>();
-        public virtual DbSet<ClientBankAccounts> UserAuthentiClientBankAccountscationInfo => Set<ClientBankAccounts>();
+        public virtual DbSet<ClientBankAccounts> ClientBankAccounts => Set<ClientBankAccounts>();
 
 
         public AppDataContext(DbContextOptions<AppDataContext> options): base(options) { }

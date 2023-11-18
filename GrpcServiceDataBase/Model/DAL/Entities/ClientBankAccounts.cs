@@ -3,6 +3,7 @@
     public class ClientBankAccounts
     {
         public int Id { get; set; }
+        public int ClientId { get; set; }
         public string Account { get; set; }
         public string Number { get; set; }
     }

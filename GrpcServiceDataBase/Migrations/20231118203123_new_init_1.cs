@@ -6,11 +6,26 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GrpcServiceDataBase.Migrations
 {
     /// <inheritdoc />
-    public partial class new_init : Migration
+    public partial class new_init_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ClientBankAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ClientId = table.Column<int>(type: "integer", nullable: false),
+                    Account = table.Column<string>(type: "text", nullable: false),
+                    Number = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientBankAccounts", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "ClientInfo",
                 columns: table => new
@@ -18,6 +33,7 @@ namespace GrpcServiceDataBase.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Phone = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     FirstName = table.Column<string>(type: "text", nullable: false),
                     LastName = table.Column<string>(type: "text", nullable: false)
@@ -26,30 +42,16 @@ namespace GrpcServiceDataBase.Migrations
                 {
                     table.PrimaryKey("PK_ClientInfo", x => x.Id);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "UserAuthentiClientBankAccountscationInfo",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Account = table.Column<string>(type: "text", nullable: false),
-                    Number = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserAuthentiClientBankAccountscationInfo", x => x.Id);
-                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ClientInfo");
+                name: "ClientBankAccounts");
 
             migrationBuilder.DropTable(
-                name: "UserAuthentiClientBankAccountscationInfo");
+                name: "ClientInfo");
         }
     }
 }

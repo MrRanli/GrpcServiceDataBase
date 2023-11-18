@@ -41,6 +41,7 @@ namespace GrpcServiceDataBase.Services
             {
                 var _ClientInfo = new ClientInfo
                 {
+                    Id = 1,
                     Name = "Тест",
                     FirstName = "Тестов",
                     LastName = "Тестович",
@@ -52,6 +53,7 @@ namespace GrpcServiceDataBase.Services
 
                 var _ClientBankAccounts = new ClientBankAccounts
                 {
+                    ClientId = 1,
                     Account = "Срочный",
                     Number = "42305840513000000112"
                 };
@@ -60,6 +62,7 @@ namespace GrpcServiceDataBase.Services
 
                 var _ClientBankAccounts2 = new ClientBankAccounts
                 {
+                    ClientId = 1,
                     Account = "До востреббования",
                     Number = "42301810413002008000"
                 };
@@ -68,6 +71,7 @@ namespace GrpcServiceDataBase.Services
 
                 var _ClientBankAccounts3 = new ClientBankAccounts
                 {
+                    ClientId= 1,
                     Account = "Карточный",
                     Number = "40817810310009035474"
                 };
@@ -82,6 +86,7 @@ namespace GrpcServiceDataBase.Services
             }
             throw new RpcException(new Status(StatusCode.NotFound, $"U have dates on tables"));
         }
+
 
         public override async Task<CheckUserDoResponse> CheckUserDo(CheckUserDoRequest request, ServerCallContext context)
         {
@@ -98,7 +103,7 @@ namespace GrpcServiceDataBase.Services
             {
                 return await Task.FromResult(new CheckUserDoResponse
                 {
-                    UserId = _ClientInfo.Id
+                    ClientId = _ClientInfo.Id
 
 
                 });
@@ -106,12 +111,13 @@ namespace GrpcServiceDataBase.Services
             throw new RpcException(new Status(StatusCode.NotFound, $"No Task with UserId"));
         }
 
+
         public override async Task<GetClientInfoUserDoResponse> GetClientInfoUserDo(GetClientInfoUserDoRequest request, ServerCallContext context)
         { 
-            if(request.UserId<=0)
+            if(request.ClientId <=0)
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "User not Found"));
 
-            var _ClientInfo = await _dbContext.ClientInfo.FirstOrDefaultAsync(t => t.Id == request.UserId);
+            var _ClientInfo = await _dbContext.ClientInfo.FirstOrDefaultAsync(t => t.Id == request.ClientId);
             if (_ClientInfo != null)
             {
                 return await Task.FromResult(new GetClientInfoUserDoResponse
@@ -123,8 +129,31 @@ namespace GrpcServiceDataBase.Services
                     Phone = _ClientInfo.Phone,
                 });
             }
-            throw new RpcException(new Status(StatusCode.NotFound, $"No Task with id{request.UserId}"));
+            throw new RpcException(new Status(StatusCode.NotFound, $"No Task with id{request.ClientId}"));
 
+        }
+
+
+        public override async Task<GetClientBankAccountsUserDoResponse> GetClientBankAccountsUserDo(GetClientBankAccountsUserDoRequest request, ServerCallContext context)
+        {
+            if (request.ClientId <= 0)
+                throw new RpcException(new Status(StatusCode.InvalidArgument, "User not Found"));
+
+            var response = new GetClientBankAccountsUserDoResponse();
+            var ClientBankAccounts = await _dbContext.ClientBankAccounts
+             .Where(t => t.ClientId == request.ClientId)
+            .ToListAsync();
+
+            foreach (var item in ClientBankAccounts)
+            {
+                response.ClientBanckAccount.Add(new GetClientBankAccountUserDoResponse
+                {
+                    Id = item.Id,
+                    Accounts = item.Account,
+                    Numbers = item.Number
+                });
+            }
+            return await Task.FromResult(response);
         }
     }
 }

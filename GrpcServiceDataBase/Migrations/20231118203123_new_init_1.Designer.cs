@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GrpcServiceDataBase.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20231117162030_new_init3")]
-    partial class new_init3
+    [Migration("20231118203123_new_init_1")]
+    partial class new_init_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,16 @@ namespace GrpcServiceDataBase.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserAuthentiClientBankAccountscationInfo");
+                    b.ToTable("ClientBankAccounts");
                 });
 
             modelBuilder.Entity("GrpcServiceDataBase.Model.DAL.Entities.ClientInfo", b =>
