@@ -3,6 +3,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace GrpcServiceDataBase.Migrations
 {
     /// <inheritdoc />
@@ -15,7 +17,7 @@ namespace GrpcServiceDataBase.Migrations
                 name: "ClientInfo",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
+                    id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     phone = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
@@ -25,7 +27,7 @@ namespace GrpcServiceDataBase.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientInfo", x => x.Id);
+                    table.PrimaryKey("PK_ClientInfo", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,14 +47,24 @@ namespace GrpcServiceDataBase.Migrations
                         name: "FK_ClientId",
                         column: x => x.ClientInfoId,
                         principalTable: "ClientInfo",
-                        principalColumn: "Id",
+                        principalColumn: "id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "ClientInfo",
-                columns: new[] { "Id", "firstName", "lastName", "name", "password", "phone" },
+                columns: new[] { "id", "firstName", "lastName", "name", "password", "phone" },
                 values: new object[] { 1, "Тестов", "Тестович", "Тест", "12345", "89969520206" });
+
+            migrationBuilder.InsertData(
+                table: "ClientBankAccounts",
+                columns: new[] { "id", "account", "ClientInfoId", "number" },
+                values: new object[,]
+                {
+                    { 1, "Срочный", 1, "42305840513000000112" },
+                    { 2, "До востреббования", 1, "42301810413002008000" },
+                    { 3, "Карточный", 1, "40817810310009035474" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_ClientBankAccounts_ClientInfoId",

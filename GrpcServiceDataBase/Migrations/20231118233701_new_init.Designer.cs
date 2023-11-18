@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GrpcServiceDataBase.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20231118232500_new_init")]
+    [Migration("20231118233701_new_init")]
     partial class new_init
     {
         /// <inheritdoc />
@@ -51,6 +51,29 @@ namespace GrpcServiceDataBase.Migrations
                     b.HasIndex("ClientInfoId");
 
                     b.ToTable("ClientBankAccounts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Account = "Срочный",
+                            ClientInfoId = 1,
+                            Number = "42305840513000000112"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Account = "До востреббования",
+                            ClientInfoId = 1,
+                            Number = "42301810413002008000"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Account = "Карточный",
+                            ClientInfoId = 1,
+                            Number = "40817810310009035474"
+                        });
                 });
 
             modelBuilder.Entity("GrpcServiceDataBase.Model.DAL.Entities.ClientInfo", b =>
@@ -58,7 +81,7 @@ namespace GrpcServiceDataBase.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("Id");
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 

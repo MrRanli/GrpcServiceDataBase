@@ -13,6 +13,8 @@ namespace GrpcServiceDataBase.Model.DAL.Entities
         public string Account { get; set; }
         [Column("number")]
         public string Number { get; set; }
+
+        public int ClientInfoId { get; set; }
         public virtual ClientInfo ClientInfo { get; set; }  
     }
 }
