@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using GrpcServiceDataBase.Model.DAL.Entities;
 using System.Numerics;
 using System.Xml.Linq;
+using GrpcServiceDataBase.Model.Entities;
 
 
 namespace GrpcServiceDataBase.Model

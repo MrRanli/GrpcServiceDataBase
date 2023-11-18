@@ -2,15 +2,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
-namespace GrpcServiceDataBase.Model.DAL.Entities
+namespace GrpcServiceDataBase.Model.Entities
 {
     [Table("ClientInfo")]
     public class ClientInfo
     {
-         public ClientInfo() 
-         {
+        public ClientInfo()
+        {
             ClientBankAccounts = new HashSet<ClientBankAccount>();
-         }
+        }
 
         [Key]
         [Column("id")]

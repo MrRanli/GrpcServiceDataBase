@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using GrpcServiceDataBase.Services;
 using GrpcServiceDataBase.Model;
-using GrpcServiceDataBase.Model.DAL.Entities;
+using GrpcServiceDataBase.Model.Entities;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using System.Xml;
 

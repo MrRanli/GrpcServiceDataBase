@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GrpcServiceDataBase.Model.DAL.Entities
+namespace GrpcServiceDataBase.Model.Entities
 {
     [Table("ClientBankAccounts")]
     public class ClientBankAccount
@@ -15,6 +15,6 @@ namespace GrpcServiceDataBase.Model.DAL.Entities
         public string Number { get; set; }
 
         public int ClientInfoId { get; set; }
-        public virtual ClientInfo ClientInfo { get; set; }  
+        public virtual ClientInfo ClientInfo { get; set; }
     }
 }

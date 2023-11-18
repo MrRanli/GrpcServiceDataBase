@@ -1,6 +1,6 @@
 ﻿using Grpc.Core;
 using GrpcServiceDataBase.Model;
-using GrpcServiceDataBase.Model.DAL.Entities;
+using GrpcServiceDataBase.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading;
 
