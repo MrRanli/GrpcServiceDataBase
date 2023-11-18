@@ -1,10 +1,18 @@
-﻿namespace GrpcServiceDataBase.Model.DAL.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace GrpcServiceDataBase.Model.DAL.Entities
 {
-    public class ClientBankAccounts
+    [Table("ClientBankAccounts")]
+    public class ClientBankAccount
     {
+        [Key]
+        [Column("id")]
         public int Id { get; set; }
-        public int ClientId { get; set; }
+        [Column("account")]
         public string Account { get; set; }
+        [Column("number")]
         public string Number { get; set; }
+        public virtual ClientInfo ClientInfo { get; set; }  
     }
 }

@@ -51,27 +51,27 @@ namespace GrpcServiceDataBase.Services
 
                 await _dbContext.AddAsync(_ClientInfo);
 
-                var _ClientBankAccounts = new ClientBankAccounts
+                var _ClientBankAccounts = new ClientBankAccount
                 {
-                    ClientId = 1,
+                    Id =1,
                     Account = "Срочный",
                     Number = "42305840513000000112"
                 };
 
                 await _dbContext.AddAsync(_ClientBankAccounts);
 
-                var _ClientBankAccounts2 = new ClientBankAccounts
+                var _ClientBankAccounts2 = new ClientBankAccount
                 {
-                    ClientId = 1,
+                    Id = 2,
                     Account = "До востреббования",
                     Number = "42301810413002008000"
                 };
 
                 await _dbContext.AddAsync(_ClientBankAccounts2);
 
-                var _ClientBankAccounts3 = new ClientBankAccounts
+                var _ClientBankAccounts3 = new ClientBankAccount
                 {
-                    ClientId= 1,
+                    Id = 3,
                     Account = "Карточный",
                     Number = "40817810310009035474"
                 };
@@ -122,7 +122,7 @@ namespace GrpcServiceDataBase.Services
             {
                 return await Task.FromResult(new GetClientInfoUserDoResponse
                 {
-                    Id = _ClientInfo.Id,
+                    ClientId = _ClientInfo.Id,
                     FirstName = _ClientInfo.FirstName,
                     LastName = _ClientInfo.LastName,
                     Name = _ClientInfo.Name,
@@ -141,14 +141,14 @@ namespace GrpcServiceDataBase.Services
 
             var response = new GetClientBankAccountsUserDoResponse();
             var ClientBankAccounts = await _dbContext.ClientBankAccounts
-             .Where(t => t.ClientId == request.ClientId)
+             .Where(t => t.ClientInfo.Id == request.ClientId)
             .ToListAsync();
 
             foreach (var item in ClientBankAccounts)
             {
                 response.ClientBanckAccount.Add(new GetClientBankAccountUserDoResponse
                 {
-                    Id = item.Id,
+                    ClientId = item.ClientInfo.Id,
                     Accounts = item.Account,
                     Numbers = item.Number
                 });

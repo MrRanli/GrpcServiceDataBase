@@ -45,7 +45,7 @@ message GetClientInfoUserDoRequest{
 }
 
 message GetClientInfoUserDoResponse{
-    int32 id = 1;
+    int32 ClientId = 1;
 	string Name = 2; 
     string FirstName = 3;
     string LastName = 4;
@@ -62,7 +62,7 @@ message GetClientBankAccountsUserDoResponse{
     repeated GetClientBankAccountUserDoResponse ClientBanckAccount = 1;
 }
 message GetClientBankAccountUserDoResponse{
-    int32 id = 1;
+    int32 ClientId = 1;
 	string Accounts = 2; 
     string Numbers = 3;
 }
