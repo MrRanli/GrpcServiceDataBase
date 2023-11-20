@@ -31,7 +31,7 @@ namespace GrpcServiceDataBase.Model
             modelBuilder.Entity<ClientInfo>().HasData(new ClientInfo
             {
                 Id = 1,
-                Phone = "89969520206",
+                Phone = "+70003135876",
                 Password = "12345",
                 Name = "Тест",
                 FirstName = "Тестов",
