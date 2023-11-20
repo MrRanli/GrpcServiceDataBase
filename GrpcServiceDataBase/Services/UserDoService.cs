@@ -14,27 +14,7 @@ namespace GrpcServiceDataBase.Services
             _dbContext = dbContext;
         }
 
-        //public override async Task<CheckUserDoResponse> CheckUserDo(CheckUserDoRequest request, ServerCallContext context)
-        //{ if(request.Password == string.Empty||request.Phone ==string.Empty)
-        //            throw new RpcException(new Status(StatusCode.InvalidArgument, "Not found info"));
-
-        //    var _UserAuthenticationInfo = new UserAuthenticationInfo
-        //    {
-        //        Password = request.Password,
-        //        Phone = request.Phone,
-        //    };
-
-        //    //await _dbContext.
-        //    await _dbContext.AddAsync(_UserAuthenticationInfo);
-        //    await _dbContext.SaveChangesAsync();
-
-        //    return await Task.FromResult(new CheckUserDoResponse
-        //    {
-        //        UserId = _UserAuthenticationInfo.Id
-        //    });
-        //}
-
-        public override async Task<PasteValuesOnTableResponse> PasteValuesOnTableUserDo(PasteValuesOnTableRequest request, ServerCallContext context)
+        public override async Task<PasteValuesOnTableResponse> PasteValuesOnTableUserDo(PasteValuesOnTableRequest request, ServerCallContext context)//экспериментальное заполнение таблицы
         {
             var _ClientInfoCheck = await _dbContext.ClientInfo.FirstOrDefaultAsync(t => t.Id != 0 || t.Id >0 );
             if (_ClientInfoCheck == null)
@@ -108,10 +88,9 @@ namespace GrpcServiceDataBase.Services
                 {
                     ClientId = _ClientInfo.Id
 
-
                 });
             }
-            throw new RpcException(new Status(StatusCode.NotFound, $"No Task with UserId"));
+            throw new RpcException(new Status(StatusCode.NotFound, $"No ClientInfo with Password = {request.Password} and Phone = {request.Phone}."));
         }
 
 
@@ -132,7 +111,7 @@ namespace GrpcServiceDataBase.Services
                     Phone = _ClientInfo.Phone,
                 });
             }
-            throw new RpcException(new Status(StatusCode.NotFound, $"No Task with id{request.ClientId}"));
+            throw new RpcException(new Status(StatusCode.NotFound, $"No ClientInfo with id = {request.ClientId}."));
 
         }
 
@@ -143,20 +122,23 @@ namespace GrpcServiceDataBase.Services
                 throw new RpcException(new Status(StatusCode.InvalidArgument, "User not Found"));
 
             var response = new GetClientBankAccountsUserDoResponse();
-            var ClientBankAccounts = await _dbContext.ClientBankAccounts
+            var _ClientBankAccounts = await _dbContext.ClientBankAccounts
              .Where(t => t.ClientInfoId == request.ClientId)
             .ToListAsync();
-
-            foreach (var item in ClientBankAccounts)
+            if (_ClientBankAccounts.Count != 0)
             {
-                response.ClientBanckAccount.Add(new GetClientBankAccountUserDoResponse
+                foreach (var item in _ClientBankAccounts)
                 {
-                    ClientId = item.ClientInfoId,
-                    Accounts = item.Account,
-                    Numbers = item.Number
-                });
+                    response.ClientBanckAccount.Add(new GetClientBankAccountUserDoResponse
+                    {
+                        ClientId = item.ClientInfoId,
+                        Accounts = item.Account,
+                        Numbers = item.Number
+                    });
+                }
+                return await Task.FromResult(response);
             }
-            return await Task.FromResult(response);
+            throw new RpcException(new Status(StatusCode.NotFound, $"No ClientBankAccounts with id = {request.ClientId}."));
         }
     }
 }
