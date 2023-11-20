@@ -54,6 +54,7 @@ namespace GrpcServiceDataBase.Services
                 var _ClientBankAccounts = new ClientBankAccount
                 {
                     Id =1,
+                    ClientInfoId = 1,
                     Account = "Срочный",
                     Number = "42305840513000000112"
                 };
@@ -63,6 +64,7 @@ namespace GrpcServiceDataBase.Services
                 var _ClientBankAccounts2 = new ClientBankAccount
                 {
                     Id = 2,
+                    ClientInfoId = 1,
                     Account = "До востреббования",
                     Number = "42301810413002008000"
                 };
@@ -72,6 +74,7 @@ namespace GrpcServiceDataBase.Services
                 var _ClientBankAccounts3 = new ClientBankAccount
                 {
                     Id = 3,
+                    ClientInfoId = 1,
                     Account = "Карточный",
                     Number = "40817810310009035474"
                 };

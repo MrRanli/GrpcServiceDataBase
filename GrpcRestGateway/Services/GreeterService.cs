@@ -1,7 +1,7 @@
 using Grpc.Core;
-using GrpcServiceDataBase;
+using GrpcRestGateway;
 
-namespace GrpcServiceDataBase.Services
+namespace GrpcRestGateway.Services
 {
     public class GreeterService : Greeter.GreeterBase
     {
