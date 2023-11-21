@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServiceDataBaseClient";
+
+package UserDo;
+
+service UserDo
+{
+	//PasteValuesOnTable
+	rpc PasteValuesOnTableUserDo(PasteValuesOnTableRequest) returns(PasteValuesOnTableResponse){}
+
+	//Check password 
+	rpc CheckUserDo(CheckUserDoRequest) returns(CheckUserDoResponse){}
+	
+	//GetClientInfoUserDo
+	rpc GetClientInfoUserDo(GetClientInfoUserDoRequest) returns(GetClientInfoUserDoResponse){}
+
+	//GetClientBankAccountsUserDo
+    rpc GetClientBankAccountsUserDo(GetClientBankAccountsUserDoRequest) returns(GetClientBankAccountsUserDoResponse){}
+}
+
+
+
+message PasteValuesOnTableRequest{
+}
+message PasteValuesOnTableResponse{
+	 string Text = 1;
+}
+
+
+
+message CheckUserDoRequest{
+	string Phone = 1;
+    string Password = 2;
+}
+
+message CheckUserDoResponse{
+	int32 ClientId = 1;
+}
+
+
+
+message GetClientInfoUserDoRequest{
+	int32 ClientId = 1;
+}
+
+message GetClientInfoUserDoResponse{
+    int32 ClientId = 1;
+	string Name = 2; 
+    string FirstName = 3;
+    string LastName = 4;
+	string Phone = 5;	 
+}
+
+
+
+message GetClientBankAccountsUserDoRequest{
+	int32 ClientId = 1;
+}
+
+message GetClientBankAccountsUserDoResponse{
+    repeated GetClientBankAccountUserDoResponse ClientBanckAccount = 1;
+}
+message GetClientBankAccountUserDoResponse{
+    int32 ClientId = 1;
+	string Accounts = 2; 
+    string Numbers = 3;
+}
