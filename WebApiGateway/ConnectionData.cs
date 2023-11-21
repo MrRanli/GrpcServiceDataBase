@@ -2,6 +2,6 @@
 {
     public static class ConnectionData
     {
-        public static string GrpcConnectionString{ get;} = "https://localhost:7147";
+        public static string GrpcConnectionString{ get;} = "http://localhost:5058";
     }
 }
